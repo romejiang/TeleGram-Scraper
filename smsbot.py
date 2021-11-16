@@ -65,7 +65,7 @@ class main():
                 users.append(user)
         print(gr+"[1] send sms by user ID\n[2] send sms by username ")
         mode = int(input(gr+"Input : "+re))
-         
+        
         message = input(gr+"[+] Enter Your Message : "+re)
         n=0
         openz=False
@@ -74,9 +74,9 @@ class main():
         
         for user in users:
             n += 1
-            if fname != "":
-                if user['id'] == fname:
-                     openz=True
+            print(user['id'],fname)
+            if (not openz) and (user['id'] == fname):
+                openz=True
             if not openz:
                 continue
             SLEEP_TIME = random.randrange(110, 130)
