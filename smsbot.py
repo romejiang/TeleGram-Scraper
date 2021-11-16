@@ -74,10 +74,10 @@ class main():
         
         for user in users:
             n += 1
-            print(user['id'],fname)
-            if (not openz) and (user['id'] == fname):
+            if (not openz) and (user['id'] == int(fname)):
                 openz=True
             if not openz:
+                print(gr+"[+] Skip:", user['name'],user['id'])
                 continue
             SLEEP_TIME = random.randrange(110, 130)
             if n % 50 == 0:
