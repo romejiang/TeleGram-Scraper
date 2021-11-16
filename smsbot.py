@@ -79,7 +79,7 @@ class main():
             if not openz:
                 print(gr+"[+] Skip:", user['name'],user['id'])
                 continue
-            SLEEP_TIME = random.randrange(110, 130)
+            SLEEP_TIME = random.randrange(120, 150)
             if n % 50 == 0:
                 time.sleep(random.randrange(2,5 )*60)
             if mode == 2:
@@ -93,14 +93,14 @@ class main():
                 client.disconnect()
                 sys.exit()
             try:
-                print(gr+"[+] Sending Message to:", user['name'],user['id'])
+                print(gr+"[+] Sending Message to:",n, user['name'],user['id'])
                 client.send_message(receiver, message.format(user['name']))
                 print(gr+"[+] Waiting {} seconds".format(SLEEP_TIME))
                 time.sleep(SLEEP_TIME)
             except PeerFloodError:
                 print(re+"[!] Getting Flood Error from telegram. \n[!] Script is stopping now. \n[!] Please try again after some time.")
-                #client.disconnect()
-                #sys.exit()
+                client.disconnect()
+                sys.exit()
             except Exception as e:
                 print(re+"[!] Error:", e)
                 print(re+"[!] Trying to continue...")
