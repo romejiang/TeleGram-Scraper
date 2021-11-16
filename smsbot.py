@@ -51,6 +51,7 @@ class main():
         os.system('clear')
         main.banner()
         input_file = sys.argv[1]
+        fname = sys.argv[2] if len(sys.argv) >= 3 else ""
         users = []
         with open(input_file, encoding='UTF-8') as f:
             rows = csv.reader(f,delimiter=",",lineterminator="\n")
@@ -66,8 +67,21 @@ class main():
         mode = int(input(gr+"Input : "+re))
          
         message = input(gr+"[+] Enter Your Message : "+re)
-         
+        n=0
+        openz=False
+        if fname == "":
+            openz=True
+        
         for user in users:
+            n += 1
+            if fname != "":
+                if user['id'] == fname:
+                     openz=True
+            if not openz:
+                continue
+            SLEEP_TIME = random.randrange(110, 130)
+            if n % 50 == 0:
+                time.sleep(random.randrange(2,5 )*60)
             if mode == 2:
                 if user['username'] == "":
                     continue
@@ -79,14 +93,14 @@ class main():
                 client.disconnect()
                 sys.exit()
             try:
-                print(gr+"[+] Sending Message to:", user['name'])
+                print(gr+"[+] Sending Message to:", user['name'],user['id'])
                 client.send_message(receiver, message.format(user['name']))
                 print(gr+"[+] Waiting {} seconds".format(SLEEP_TIME))
                 time.sleep(SLEEP_TIME)
             except PeerFloodError:
                 print(re+"[!] Getting Flood Error from telegram. \n[!] Script is stopping now. \n[!] Please try again after some time.")
-                client.disconnect()
-                sys.exit()
+                #client.disconnect()
+                #sys.exit()
             except Exception as e:
                 print(re+"[!] Error:", e)
                 print(re+"[!] Trying to continue...")
