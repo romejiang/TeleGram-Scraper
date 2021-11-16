@@ -95,16 +95,23 @@ class main():
             try:
                 print(gr+"[+] Sending Message to:",n, user['name'],user['id'])
                 client.send_message(receiver, message.format(user['name']))
-                print(gr+"[+] Waiting {} seconds".format(SLEEP_TIME))
-                time.sleep(SLEEP_TIME)
             except PeerFloodError:
                 print(re+"[!] Getting Flood Error from telegram. \n[!] Script is stopping now. \n[!] Please try again after some time.")
                 client.disconnect()
-                sys.exit()
+                time.sleep(random.randrange(15,25)*60)
+                client.connect()
+                if not client.is_user_authorized():
+                    client.send_code_request(phone)
+                    os.system('clear')
+                    main.banner()
+                    client.sign_in(phone, input(gr+'[+] Enter the code: '+re))
+                # sys.exit()
             except Exception as e:
                 print(re+"[!] Error:", e)
                 print(re+"[!] Trying to continue...")
-                continue
+            finally:
+                print(gr+"[+] Waiting {} seconds".format(SLEEP_TIME))
+                time.sleep(SLEEP_TIME)
         client.disconnect()
         print("Done. Message sent to all users.")
 
