@@ -5,6 +5,8 @@ import os, sys
 import configparser
 import csv
 import time
+from telethon.tl.types import ChannelParticipantsRecent
+
 
 re="\033[1;31m"
 gr="\033[1;32m"
@@ -77,7 +79,7 @@ target_group=groups[int(g_index)]
 print(gr+'[+] Fetching Members...')
 time.sleep(1)
 all_participants = []
-all_participants = client.get_participants(target_group, aggressive=True)
+all_participants = client.get_participants(target_group,  filter=ChannelParticipantsRecent ,aggressive=True)
  
 print(gr+'[+] Saving In file...')
 time.sleep(1)
