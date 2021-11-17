@@ -81,7 +81,7 @@ class main():
                 continue
             SLEEP_TIME = random.randrange(150, 180)
             if n % 5 == 0:
-                SLEEP_TIME = random.randrange(5, 8) * 60
+                SLEEP_TIME = random.randrange(10, 15) * 60
                 print(gr+"[+] 5 = Waiting {} seconds".format(SLEEP_TIME))
                 time.sleep(SLEEP_TIME)
             if mode == 2:
